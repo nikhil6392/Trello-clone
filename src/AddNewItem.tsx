@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { AddItemButton, NewItemButton } from "./styles";
+import { AddItemButton } from "./styles";
 import { NewItemForm } from "./NewItemForm";
 interface AddNewItemProps{
     onAdd(text:string):void
