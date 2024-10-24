@@ -1,9 +1,11 @@
+import { nanoid } from "nanoid"
 import React ,{ createContext,useReducer,useContext } from "react"
 
 const AppStateContext = createContext<AppStateContextProps>({} as AppStateContextProps)
 
 interface AppStateContextProps {
     state:AppState
+    dispatch:React.Dispatch<Action>
 }
 interface Task {
     id:string
@@ -43,8 +45,9 @@ const appData:AppState = {
 }
 
 export const AppStateProvider = ({children}:React.PropsWithChildren<{}>)=>{
+    const [state,dispatch] = useReducer(appStateReducer,appData)
     return (
-        <AppStateContext.Provider value = {{state:appData}}>
+        <AppStateContext.Provider   value = {{state,dispatch}}>
         {children}
         </AppStateContext.Provider>
     )
@@ -54,3 +57,42 @@ export const AppStateProvider = ({children}:React.PropsWithChildren<{}>)=>{
 export const useAppState = () =>{
     return useContext(AppStateContext)
 }
+
+//defining the Action for giving the ability to use it for Adding list of task
+
+type Action = 
+   | {
+        type : "ADD_LIST"
+        payload: string
+    }
+   | {
+        type:"ADD_Task"
+        payload:{text:string;listId:string}
+    }
+
+//Defining the appStateReducer
+
+const appStateReducer =(state:AppState ,action:Action):AppState =>{
+    switch(action.type){
+        case "ADD_LIST":{
+            //Reducer Logic here
+            return {
+                ...state,
+                lists:[
+                    ...state.lists,
+                    { id: nanoid(),text: action.payload, tasks: []}
+                ]
+            }
+        }
+        case "ADD_Task":{
+            //Reducer logic here
+            return {
+                ...state
+            }
+        }
+        default: {
+            return state
+        }
+    }
+}
+
