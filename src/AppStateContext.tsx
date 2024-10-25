@@ -1,4 +1,4 @@
-import { overrideItemAtIndex,findItemIndexById} from './utils/arrayUtils'
+import { overrideItemAtIndex,findItemIndexById,moveItem} from './utils/arrayUtils'
 import { nanoid } from "nanoid"
 import React ,{ createContext,useReducer,useContext } from "react"
 
@@ -116,6 +116,14 @@ const appStateReducer =(state:AppState ,action:Action):AppState =>{
                     updatedTargetList,
                     targetListIndex
                 )
+            }
+        }
+        case "MOVE_LIST":{
+            const {dragIndex,hoverIndex} = action.payload
+
+            return {
+                ...state,
+                lists: moveItem(state.lists,dragIndex,hoverIndex)
             }
         }
         default: {
