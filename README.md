@@ -7,7 +7,7 @@
 - **Hooks**
 - **useState**
 - **useEffect**
-- **Context API**
+- **Context API [AppStateContext](.src/AppStateContext)**
 - **HTML**
 - **CSS**
 - **styled Components**
