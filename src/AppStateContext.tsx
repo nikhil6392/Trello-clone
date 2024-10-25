@@ -71,6 +71,13 @@ type Action =
         type:"ADD_Task"
         payload:{text:string;listId:string}
     }
+    |{
+        type:"MOVE_LIST"
+        payload:{
+            dragIndex:number
+            hoverIndex:number
+        }
+    }
 
 //Defining the appStateReducer
 

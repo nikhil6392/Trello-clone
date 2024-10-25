@@ -11,7 +11,7 @@ const App=()=>{
   return (
     <AppContainer>
       {state.lists.map((list,i)=>(
-        <Column text = {list.text} key ={list.id} index={i}/>
+        <Column id={list.id} text = {list.text} key ={list.id} index={i}/>
       ))}
       <AddNewItem
         toggleButtonText="+ Add another list"
